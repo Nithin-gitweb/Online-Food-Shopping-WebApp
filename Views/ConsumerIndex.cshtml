@@ -1,0 +1,45 @@
+﻿@model List<TruYumCS_OrderFoodOnline.Models.MenuItem>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="checkbox"]').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+</script>
+@{
+    ViewBag.Title = "ConsumerIndex";
+}
+
+<h3>@Html.ActionLink("View Cart", "ViewCart")</h3>
+<h2>Choose Items To be Added To Cart</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Free Delivery</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="width: 150px">@item.Name</td>
+            @if (item.FreeDelivery == true)
+            {
+                <td style="width: 150px"><input type="checkbox" name="freedelivery" value="true" checked></td>
+            }
+            else
+            {
+                <td style="width: 150px"><input type="checkbox" name="freedelivery" value="true"></td>
+            }
+            <td style="width: 150px">@item.Price</td>
+            <td style="width: 150px">@item.Type</td>
+            <td style="width: 150px">@Html.ActionLink("Add To Cart", "AddToCart", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Go Back to Type of User Selection Menu", "Index")
+

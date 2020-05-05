@@ -1,0 +1,25 @@
+﻿@model List<TruYumCS_OrderFoodOnline.Models.Cart>
+@{
+    ViewBag.Title = "ViewCart";
+}
+
+<h2>Items in cart right now</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Free Delivery</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td style="width: 150px">@item.Name</td>
+            <td style="width: 150px">@item.FreeDelivery</td>
+            <td style="width: 150px">@item.Price</td>
+            <td style="width: 150px">@Html.ActionLink("Delete","DeleteItemFromCart",new { id = item.Id })</td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Back To Menu","ConsumerIndex")
+

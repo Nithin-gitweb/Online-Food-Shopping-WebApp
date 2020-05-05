@@ -1,0 +1,61 @@
+﻿@model List<TruYumCS_OrderFoodOnline.Models.MenuItem>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="checkbox"]').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+</script>
+@{
+    ViewBag.Title = "AdminIndex";
+}
+
+<h2>Items available in stock now!</h2>
+<h4>@Html.ActionLink("Create New", "AddNewItem")</h4>
+<hr />
+<table>
+    <tr>
+        <th style="width: 150px">Name</th>
+        <th>Price</th>
+        <th>Active</th>
+        <th>Date Of Launch</th>
+        <th>Type</th>
+        <th>Free Delivery</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td style="width: 150px">@item.Name</td>
+            <td style="width: 150px">@item.Price</td>
+            @if (item.Active == true)
+            {
+                <td style="width: 150px"><input type="checkbox" name="active" value="active" checked></td>
+            }
+            else
+            {
+                <td style="width: 150px"><input type="checkbox" name="freedelivery" value="true"></td>
+            }
+            <td style="width: 150px">@item.DateOfLaunch</td>
+            <td style="width: 150px">@item.Type</td>
+            @if (item.FreeDelivery == true)
+            {
+                <td style="width: 150px"><input type="checkbox" name="freedelivery" value="true" checked></td>
+            }
+            else
+            {
+                <td style="width: 150px"><input type="checkbox" name="freedelivery" value="true"></td>
+            }
+            <td>@Html.ActionLink("Edit", "EditItem", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
+<hr />
+@Html.ActionLink("Back to Type of User Selection Menu", "Index")
+
